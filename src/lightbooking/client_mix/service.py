@@ -58,12 +58,15 @@ def review(reference, candidates):
     )
 
 
-def decide(signal, report, assessment_passed, reference):
+def decide(signal, report, assessment_passed, reference, fragile_groups=()):
     notes = []
     if set(signal.missing) & CRITICAL_FIELDS:
         notes.append("MISSING_DECISION_FIELD")
     if not assessment_passed:
         notes.append("BACKTEST_GATE")
+    if signal.record.group in fragile_groups:
+        # 回放段任一可能结局组合下新估法越线，该组转人工，不占席位。
+        notes.append("REPLAY_WORST_CASE")
     cohort = report.groups[signal.record.group]
     if cohort.status in {"LOW_SUPPORT", "REGIME_CHANGED"}:
         notes.append(cohort.status)

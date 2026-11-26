@@ -27,6 +27,7 @@ class Assessment:
     radius: float | None
     test_passed: bool
     report: dict
+    fragile_groups: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

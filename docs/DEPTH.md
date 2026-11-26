@@ -28,3 +28,7 @@
 | TRAP-44 | 稀疏或常量参考出现越界值时拦住自动分派 | `src/lightbooking/client_mix/service.py` | `tests/test_client_mix.py::test_constant_distribution_detects_outside` |
 | TRAP-53 | 同批重排仍得到相同证据和决策 | `src/lightbooking/checkout_reconcile/service.py` | `tests/test_checkout_reconcile.py::test_report_is_permutation_invariant` |
 | TRAP-54 | 单笔推理与合并调用的结果一致 | `src/lightbooking/rental_hist_bayes/service.py` | `tests/test_rental_hist_bayes.py::test_score_is_batch_invariant` |
+| TRAP-61 | 撤仓未知结局不参与训练校准，回放按同一结果成对计分 | `src/lightbooking/shoot_holdout/service.py` | `tests/test_censored_replay.py::test_unreceipted_orders_stay_out_of_training_and_calibration` |
+| TRAP-62 | 任一可能结局组合下越线的棚组整组转人工，不占席位 | `src/lightbooking/shoot_holdout/service.py` | `tests/test_censored_replay.py::test_fragile_group_goes_manual_and_releases_no_seats` |
+| TRAP-63 | 临界分数用精确分数裁决，不受舍入误差影响 | `src/lightbooking/shoot_holdout/evaluation.py` | `tests/test_censored_replay.py::test_critical_line_is_exact_and_not_swayed_by_rounding` |
+| TRAP-64 | 晚到撤仓记录过了回放截止日，重算不改当班名单 | `src/lightbooking/lighting_holds/service.py` | `tests/test_censored_replay.py::test_late_withdrawal_record_past_replay_deadline_keeps_roster` |

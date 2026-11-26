@@ -1,9 +1,59 @@
 from bisect import bisect_left
+from fractions import Fraction
 from itertools import groupby
 from math import ceil, log
 from statistics import mean
 
 from ..settings import TARGET
+
+
+# 现行布里尔分数容许线：新估法损失 ≤ 5/4 × 旧估法损失 + 3/200。
+# 临界裁决用精确分数，舍入误差不能左右结论。
+TOLERANCE_SLOPE = Fraction(5, 4)
+TOLERANCE_INTERCEPT = Fraction(3, 200)
+
+
+def margin_term(predicted, incumbent, actual):
+    """同一结果下，新估法相对旧估法容许线的逐单余量（精确分数）。"""
+    estimate = Fraction(predicted)
+    reference = Fraction(incumbent)
+    outcome = Fraction(actual)
+    return (outcome - estimate) ** 2 - TOLERANCE_SLOPE * (outcome - reference) ** 2
+
+
+def observed_margin(rows):
+    """已确认结局单据的容许线余量合计；未知结局不参与此口径。"""
+    return sum(
+        (
+            margin_term(row.predicted, row.incumbent, row.actual)
+            for row in rows
+            if row.occurred
+        ),
+        Fraction(0),
+    )
+
+
+def worst_case_margin(rows):
+    """任一可能结局组合下的最不利余量合计。
+
+    逐单独立取最不利结局后求和即得全局最不利：同一笔未知结局的单据，
+    新旧估法按同一结果计分，再取让新估法最吃亏的那个结局。
+    """
+    total = Fraction(0)
+    for row in rows:
+        if row.occurred:
+            total += margin_term(row.predicted, row.incumbent, row.actual)
+        else:
+            total += max(
+                margin_term(row.predicted, row.incumbent, 0.0),
+                margin_term(row.predicted, row.incumbent, 1.0),
+            )
+    return total
+
+
+def exceeds_allowance(margin, count):
+    """余量合计严格大于 容许截距 × 单数 即越线；精确比较，临界不翻转。"""
+    return margin > TOLERANCE_INTERCEPT * count
 
 
 def percentile(values, coverage):

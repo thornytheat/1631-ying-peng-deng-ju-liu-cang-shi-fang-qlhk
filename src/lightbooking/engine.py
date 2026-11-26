@@ -55,7 +55,13 @@ def plan(packet=None, *, as_of=DEFAULT_DAY, capacity=DEFAULT_BUDGET):
     decisions = []
     details = {}
     for signal in ready:
-        rules = decide(signal, shifts, assessment.test_passed, history)
+        rules = decide(
+            signal,
+            shifts,
+            assessment.test_passed,
+            history,
+            assessment.fragile_groups,
+        )
         estimate = score_card(model, assessment, signal)
         fields = signal.record.reported
         filled = {
