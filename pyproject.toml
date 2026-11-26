@@ -1,0 +1,10 @@
+[project]
+name = "lightbooking"
+version = "1.0.0"
+requires-python = ">=3.12"
+description = "影棚灯具留仓释放"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>影棚灯具留仓释放</title>
+<link rel="stylesheet" href="/static/theme.css"><link rel="stylesheet" href="/static/components.css"><link rel="stylesheet" href="/static/layout.css">
+<script defer src="/static/workbench.js"></script></head>
+<body data-visual="duplex">
+<a href="#work-area" class="skip">跳到工作内容</a>
+<div class="frame">
+<nav aria-label="工作台导航"><span class="brand">影棚器材租赁</span><a href="#chart_panel">合同留仓与催确认</a><a href="#queue_panel">预约核对队列</a><a href="#check_panel">回放核验</a></nav>
+<div class="workspace" id="work-area">
+<header class="topbar">
+<div><h1>影棚灯具留仓释放</h1><p class="context">器材租赁预约主管 · 加入催确认与释放队列</p></div>
+<div><form class="controls" id="controls"><label>当天催确认席位<input id="capacity" type="number" min="0" max="100" value="15" required></label>
+<button class="action" id="simulate">试算分派</button><button class="action secondary" id="register" type="button" disabled>登记当前方案</button></form>
+<div class="operation-message"><output id="message" aria-live="polite">正在载入单据…</output><a id="release_version" hidden>查看登记版</a></div></div></header>
+<main class="sheet">
+<section class="kpis" aria-label="本批次概况"><div class="kpi"><span>候选预约单</span><strong id="metric_cases">—</strong></div>
+<div class="kpi"><span>本轮已排入</span><strong id="metric_queue">—</strong></div><div class="kpi"><span>锁定及转人工</span><strong id="metric_held">—</strong></div>
+<div class="kpi"><span>排查席位 / 本轮额度</span><strong id="metric_used">—</strong></div></section>
+<section class="panel picture" id="chart_panel"><div class="panel-title"><h2>合同留仓与催确认</h2><span>业务证据</span></div>
+<canvas id="chart" aria-label="合同留仓与催确认。下方单据与图形使用同一份方案。" role="img"></canvas><p class="caption">浅色是锁定或人工核阅单，深色是排入催确认的预约。</p><aside class="hold-bench" aria-label="冻结、待确认与替代器材"><h3>套件可释放性</h3><dl id="scene"></dl></aside></section>
+<section class="panel queue-panel" id="queue_panel"><div class="panel-title"><h2>预约核对队列</h2><span id="result_count">—</span></div>
+<div class="filters"><label>预约单号<input id="search" type="search" placeholder="按编号搜索" autocomplete="off"></label>
+<label>业务分组<select id="cohort"><option value="">全部分组</option></select></label>
+<label>裁决状态<select id="disposition"><option value="">全部状态</option><option value="allocated">已排入</option><option value="held">业务锁定</option><option value="manual">人工复核</option><option value="deferred">待排额度</option><option value="monitor">暂不处理</option></select></label></div>
+<div class="table-scroll" tabindex="0" role="region" aria-label="预约核对队列"><table><thead><tr><th scope="col">预约单</th><th scope="col">分组</th><th scope="col">估计</th><th scope="col">额度</th><th scope="col">状态</th></tr></thead><tbody id="queue"></tbody></table></div></section>
+<section class="panel detail-panel"><div class="panel-title"><h2>预约单证据</h2></div><div id="detail"><p>从队列选择单据。</p></div></section>
+<section class="panel replay model-paper" id="check_panel"><div class="panel-title"><h2>回放核验</h2></div><p id="model_line"></p><strong id="replay_loss">—</strong><p id="replay_metric"></p><p>候选模型 / 分组基线</p><p id="replay_count"></p><ul id="regimes"></ul></section>
+</main><footer class="statusbar"><span id="run_ticket">—</span><span>演练档案</span><a class="export-action" id="export" href="/api/decisions.csv">导出当前单据 CSV</a></footer>
+</div></div></body></html>

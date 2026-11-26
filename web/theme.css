@@ -1,0 +1,6 @@
+:root {
+  --bg:#f7e9e3; --surface:#fff6f1; --ink:#482e28; --muted:#78554d; --line:#e1c5bd;
+  --accent:#b04941; --accent-soft:#ebc5bf; --warning:#933421; --button-text:#fff6f1;
+  --font-ui:"Avenir Next", "PingFang SC", sans-serif; --font-display:"Avenir Next", "PingFang SC", sans-serif; --font-num:"Courier New", monospace;
+  --radius:20px; --pad:23px; --gap:19px; --row:36px; --control:38px;
+}

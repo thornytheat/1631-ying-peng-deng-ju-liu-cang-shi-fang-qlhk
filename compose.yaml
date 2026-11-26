@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:${APP_PORT:-18831}:8000"
+    volumes:
+      - register:/app/var
+    healthcheck:
+      test: ["CMD", "python", "-c", "from urllib.request import urlopen; urlopen('http://127.0.0.1:8000/healthz', timeout=2).read()"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+volumes:
+  register:

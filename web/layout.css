@@ -1,0 +1,59 @@
+
+.kpis {grid-area:metrics} .picture {grid-area:picture} .queue-panel {grid-area:queue}
+.detail-panel {grid-area:details} .replay {grid-area:replay}
+
+.frame {grid-template-columns:minmax(0,1fr);background:var(--bg)}
+nav {padding:19px 4vw;justify-content:flex-end;background:var(--surface)}
+.brand{margin-right:auto}
+.workspace {padding:21px 4vw 30px}
+.topbar {grid-template-columns:minmax(0,1fr) max-content; background:var(--accent-soft);padding:21px 24px 17px;border-radius:26px 26px 9px 9px;align-items:center}
+.sheet {grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr); grid-template-areas:"metrics metrics" "picture replay" "queue details"}
+.kpis {gap:10px}
+.kpi {background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.picture{background:var(--surface);border-radius:32px 8px 32px 8px}
+.replay {border-radius:8px 32px 8px 32px}
+@media(max-width:850px){.topbar{grid-template-columns:1fr}.workspace{padding:13px}}
+
+body {margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-ui); font-size:14px; min-width:0; font-size:14px}
+.topbar .context {color:#725043;font-weight:600}
+.controls input,.filters input,.filters select {background:#fff9f4;border-color:#d4b0a1}
+.action {min-height:var(--control); padding:8px 13px; color:var(--button-text); background:var(--accent); font-weight:750; border:1px solid var(--accent); border-radius:var(--radius); border-radius:100px;font-size:13px}
+.action.secondary {background:transparent;color:var(--ink);border-color:var(--line); border-color:#c79686;background:#fff4ed}
+.kpi {display:flex; flex-direction:column; justify-content:space-between; min-width:0; gap:8px; padding:var(--pad); min-height:87px;padding-inline:19px}
+.kpi strong {font:750 clamp(19px,2.6vw,34px)/1 var(--font-num); font-variant-numeric:tabular-nums; color:#6e3d32;font-weight:750;letter-spacing:-.07em}
+.kpi:nth-child(2) {border-color:#be8070;background:#ffe7dd}
+.picture .panel-title span {display:none}
+.picture canvas {background:#f7e6df;border-radius:12px 3px;height:176px}
+.table-scroll {overflow:auto; max-height:340px; border-radius:9px;border:1px solid #ebd4cc; max-height:324px}
+.queue-panel th {background:#f7e3db;color:#734a40;font-weight:700}
+.queue-panel th,.queue-panel td {padding:8px 10px}
+.queue-panel tr[data-selected=true] {background:#f4d8d1}
+.state-label {display:inline-block;font-size:12px; border:1px solid var(--line); padding:3px 5px; white-space:nowrap; border-radius:30px;padding-inline:8px}
+.tag-held,.tag-manual {color:var(--warning); background:#f6e1d7;border-color:#d7aa9b}
+.detail-panel {background:#fffdf9;border-radius:4px 32px 32px 32px}
+.detail-panel h3 {color:#874539}
+.replay strong {color:#90443f}
+#regimes li {padding:4px 0;border-top:1px solid var(--line); border-top-color:#e6cbc4}
+
+.hold-bench {padding-top:11px;border-top:1px solid #dec5bc;margin-top:12px}
+.hold-bench h3 {font-size:14px;color:#713c32;margin-bottom:7px}
+.hold-bench dl {display:flex;gap:7px;flex-wrap:wrap}
+.hold-bench .scene-row {border-radius:999px;padding:5px 10px;border:1px solid #dcb2a6;background:#fff8f3;display:flex;gap:6px}
+.hold-bench .scene-row:first-child {background:#f9dfd5;border-color:#bc7970}
+.hold-bench dt {font-size:12px;color:#7e524a}
+.hold-bench dd {margin:0;color:#663a33;font-weight:800;font-family:var(--font-num)}
+.hold-bench [data-empty] {background:#ffe8dc;border-radius:10px;padding:6px 9px}
+
+.brand {font-weight:760;color:#81473e}
+nav a:hover {color:#873b34;text-decoration:underline}
+.controls input:focus {border-color:#b96356}
+.controls .action:first-of-type:hover:enabled {background:#963f38}
+.controls .secondary:hover:enabled {background:#ffe8de}
+.detail-panel .panel-title {padding:1px 0 8px;border-bottom:1px solid #ecd1c5}
+.detail-panel summary {padding:4px 0}
+.detail-panel .decision-note {border-radius:6px;background:#fbe8df;padding:7px 10px}
+.row-button:hover {color:#9b4b40}
+.picture .caption {color:#81594f}
+.model-paper .panel-title h2 {font-size:18px;color:#814841}
+.statusbar a {color:#935148;text-decoration-thickness:2px}
+@media(max-width:720px){.kpi{min-height:75px}.topbar{padding:14px}.panel-title{margin-bottom:8px}}
